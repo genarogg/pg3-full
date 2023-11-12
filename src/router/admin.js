@@ -12,7 +12,9 @@ import {
     agregarProductoPost,
     eliminarProductoDelete,
     agregarImgProductoGet,
-    agregarImgProductoPost
+    agregarImgProductoPost,
+    actualizarProductoGet,
+    actualizarProductoPost
 } from '../controllers/adminController.js';
 
 const router = express.Router();
@@ -36,5 +38,10 @@ router.delete('/producto/eliminar/:id', eliminarProductoDelete);
 router.get('/producto/imagen/:id', agregarImgProductoGet);
 
 router.post('/producto/imagen/:id',upload.array('img', 4), agregarImgProductoPost);
+
+router.get('/producto/editar/:id', actualizarProductoGet);
+
+router.post('/producto/editar/:id', actualizarProductoPost);
+
 
 export default router;

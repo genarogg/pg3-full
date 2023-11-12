@@ -1,40 +1,120 @@
 <%- include("../../global/header.ejs") -%> <%- include("../global/nav.ejs") -%>
+<style>
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-<div class="newProduct">
-  <div class="container">
-    <form action="/admin/producto/agregar" method="post">
-      <div class="containerInfo">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" required />
+  .crear-producto {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 
-        <label for="descripcion">Descripción:</label>
-        <textarea name="descripcion" id="descripcion" rows="3"></textarea>
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
 
-        <label for="codigo">Código:</label>
-        <input type="text" name="codigo" id="codigo" required />
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
 
-        <label for="precio">Precio:</label>
-        <input type="number" name="precio" id="precio" required />
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+  }
 
-        <label for="categoria">Categoría:</label>
-        <select name="categoria" id="categoria">
-          <% categorias.forEach(function(categoria) { %>
-          <option value="<%= categoria.dataValues.id %>">
-            <%= categoria.dataValues.nombre %>
-          </option>
-          <% }); %>
-        </select>
+  button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
 
-        <label for="color">Color:</label>
-        <input type="text" name="color" id="color" />
+  button:hover {
+    background-color: #218838;
+  }
+</style>
+<section class="crear-producto">
+  <form action="/admin/producto/editar/<%= datos.id %>" method="post" id="<%= datos.id %>">
+    <label for="nombre">Nombre del Producto:</label>
+    <input
+      value="<%= datos.nombre %>"
+      type="text"
+      id="nombre"
+      name="nombre"
+      required
+    />
 
-        <label for="soporte">Soporte:</label>
-        <input type="text" name="soporte" id="soporte" />
+    <label for="descripcion">Descripción del Producto:</label>
 
-        <input type="submit" value="Crear Producto" />
-      </div>
-    </form>
-  </div>
-</div>
+    <textarea name="descripcion" id="descripcion" required>
+        <%= datos.descripcion %>
+      </textarea
+    >
+
+    <label for="codigo">Código:</label>
+    <input
+      value="<%= datos.codigo %>"
+      type="text"
+      id="codigo"
+      name="codigo"
+      required
+    />
+
+    <label for="precio">Precio:</label>
+    <input
+      value="<%= datos.precio %>"
+      type="number"
+      id="precio"
+      name="precio"
+      step="0.01"
+      required
+    />
+
+    <label for="categoria">Categoría:</label>
+    <select name="categoria" id="categoria">
+      <option value="<%= producto.categoria_id %>">
+        <%= producto.categoria %>
+      </option>
+      <% categorias.forEach(function(categoria) { %>
+      <option value="<%= categoria.dataValues.id %>">
+        <%= categoria.dataValues.nombre %>
+      </option>
+      <% }); %>
+    </select>
+
+    <label for="color">Color:</label>
+    <input value="<%= datos.color %>" type="text" id="color" name="color" />
+
+    <label for="soporte">Soporte:</label>
+    <input
+      value="<%= datos.soporte %>"
+      type="text"
+      id="soporte"
+      name="soporte"
+    />
+
+    <button type="submit">Actualizar Producto</button>
+  </form>
+</section>
 
 <%- include("../../global/footer.ejs") -%>

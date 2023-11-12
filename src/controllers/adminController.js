@@ -16,6 +16,11 @@ import {
     agregarImgProductoPost
 } from "./admin/productos/imagenesProducto.js"
 
+import {
+    actualizarProductoGet,
+    actualizarProductoPost
+} from "./admin/productos/editarProducto.js"
+
 export {
     categoriasGet,
     categoriasPost,
@@ -28,5 +33,7 @@ export {
     agregarProductoPost,
     eliminarProductoDelete,
     agregarImgProductoGet,
-    agregarImgProductoPost
+    agregarImgProductoPost,
+    actualizarProductoGet,
+    actualizarProductoPost
 }

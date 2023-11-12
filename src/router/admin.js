@@ -35,6 +35,6 @@ router.delete('/producto/eliminar/:id', eliminarProductoDelete);
 
 router.get('/producto/imagen/:id', agregarImgProductoGet);
 
-router.post('/producto/imagen/:id', agregarImgProductoPost);
+router.post('/producto/imagen/:id',upload.array('img', 4), agregarImgProductoPost);
 
 export default router;

@@ -1,0 +1,49 @@
+<%- include("./global/header.ejs") -%>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="display-4">Iniciar Sesión</h1>
+    </div>
+  </div>
+
+  <div class="row mt-4 justify-content-center">
+    <div class="col-md-6">
+      <form action="/login" method="post">
+        <div class="form-group">
+          <label for="usuario">Usuario</label>
+          <input
+            id="usuario"
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="Ingrese su usuario"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contrasena">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="Ingrese su contraseña"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Iniciar Sesión
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row mt-3 justify-content-center">
+    <div class="col-md-6 text-center">
+      <p>¿No tienes una cuenta? <a href="/registro">Regístrate aquí</a>.</p>
+    </div>
+  </div>
+</div>
+
+<%- include("./global/footer.ejs") -%>

@@ -1,0 +1,21 @@
+<%- include("../../global/header.ejs") -%> <%- include("../global/nav.ejs") -%>
+
+<div class="container mt-5">
+  <h2>Agregar Categoría</h2>
+  <form action="/admin/categorias/agregar" method="post">
+    <div class="form-group">
+      <label for="nombreCategoria">Nombre de la Categoría</label>
+      <input
+        name="nombre"
+        type="text"
+        class="form-control"
+        id="nombreCategoria"
+        placeholder="Ingrese el nombre de la categoría"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-success">Agregar Categoría</button>
+  </form>
+</div>
+
+<%- include("../../global/footer.ejs") -%>

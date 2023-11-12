@@ -1,0 +1,168 @@
+.newProduct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 60px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.newProduct .container {
+  width: 80%;
+}
+.newProduct .container form {
+  width: 100%;
+  text-align: left;
+  border-radius: 5px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.newProduct .container form .containerImg {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  gap: 10px;
+}
+.newProduct .container form .containerImg .imgPrimaria .input,
+.newProduct .container form .containerImg .imgSecundarias .input {
+  background-color: rgba(31, 41, 55, 0);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.newProduct .container form .containerImg .imgPrimaria * {
+  min-height: 450px;
+  max-height: 800px;
+  width: 100%;
+}
+.newProduct .container form .containerImg .imgSecundarias * {
+  aspect-ratio: 5/5;
+  width: 100%;
+}
+.newProduct .container form .containerImg .input label {
+  border: 5px dashed rgba(211, 211, 211, 0.6);
+  width: 100%;
+  display: block;
+}
+.newProduct .container form .containerImg .input label img {
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.newProduct .container form .containerImg .input label img:empty {
+  display: none;
+}
+.newProduct .container form .containerImg .input input[type="file"] {
+  visibility: hidden;
+  display: none;
+}
+.newProduct .container form .containerImg .imgSecundarias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  gap: 10px;
+}
+@media screen and (max-width: 360px) {
+  .newProduct .container form .containerImg .imgSecundarias {
+    grid-template-columns: repeat(auto-fit, minmax(95vw, 1fr));
+  }
+}
+.newProduct .container form .containerInfo {
+  border: 1px solid #28a745;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+.newProduct .container form .containerInfo label {
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  color: #282828;
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: block;
+}
+.newProduct .container form .containerInfo textarea {
+  max-height: 85px;
+  min-height: 85px;
+}
+.newProduct .container form .containerInfo input,
+.newProduct .container form .containerInfo textarea,
+.newProduct .container form .containerInfo select {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 10px 5px;
+  border: 1px solid #28a745;
+  color: #1f2937;
+}
+.newProduct .container form .containerInfo input[type="submit"],
+.newProduct .container form .containerInfo textarea[type="submit"],
+.newProduct .container form .containerInfo select[type="submit"] {
+  background-color: #28a745;
+  bottom: 20px;
+  width: 100%;
+}
+.newProduct .container form .containerInfo input[type="submit"]:hover,
+.newProduct .container form .containerInfo textarea[type="submit"]:hover,
+.newProduct .container form .containerInfo select[type="submit"]:hover {
+  background-color: #4f46e5;
+  cursor: pointer;
+}
+
+.newProduct.update .container form .containerImg .input label {
+  border: none;
+}
+.newProduct.update .container form .containerImg .input label img {
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.newProduct.update .container form .containerImg .input label img:empty {
+  display: initial;
+}
+
+
+
+@-webkit-keyframes show {
+  from {
+    opacity: 0;
+    scale: 25%;
+  }
+  to {
+    opacity: 1;
+    scale: 100%;
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    scale: 25%;
+  }
+  to {
+    opacity: 1;
+    scale: 100%;
+  }
+}
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

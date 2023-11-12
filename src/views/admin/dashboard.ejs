@@ -1,0 +1,30 @@
+<%- include("../global/header.ejs") -%> <%- include("./global/nav.ejs") -%>
+
+<main role="main" class="col-md-9 col-lg-10 px-4 mt-3 mx-auto">
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom"
+  >
+    <h1 class="h2">Dashboard</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <a href="/admin/productos" class="card ">
+        <div class="card-body">
+          <h5 class="card-title">Productos</h5>
+          <!-- <p class="card-text">Contenido de la sección 1.</p> -->
+        </div>
+      </a>
+    </div>
+
+    <div class="col-lg-6">
+      <a href="/admin/categorias" class="card">
+        <div class="card-body">
+          <h5 class="card-title">Categorías</h5>
+          <!-- <p class="card-text">Contenido de la sección 2.</p> -->
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+<%- include("../global/footer.ejs") -%>

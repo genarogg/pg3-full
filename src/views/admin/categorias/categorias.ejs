@@ -1,0 +1,39 @@
+<%- include("../../global/header.ejs") -%> <%- include("../global/nav.ejs") -%>
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Tabla de Categorías</h2>
+    <a href="/admin/categorias/agregar">
+      <button type="button" class="btn btn-success">Añadir Categoría</button>
+    </a>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% datos.forEach(function(categoria) { %>
+
+      <tr>
+        <td><%= categoria.dataValues.id %> %></td>
+        <td><%= categoria.dataValues.nombre %></td>
+        <td>
+          <a
+            class="idCategoria btn btn-warning"
+            href="/admin/categorias-editar/<%= categoria.id %>"
+            id="<%= categoria.id %>"
+          >
+            editar
+          </a>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+<%- include("../../global/footer.ejs") -%>

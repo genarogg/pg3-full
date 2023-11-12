@@ -1,0 +1,98 @@
+<%- include("../../global/header.ejs") -%> <%- include("../global/nav.ejs") -%>
+
+<style>
+  button a {
+    color: aliceblue;
+  }
+</style>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Tabla de Productos</h2>
+    <a
+      href="/admin/producto/agregar
+    "
+      ><button
+        type="button"
+        class="btn btn-success"
+        data-toggle="modal"
+        data-target="#agregarProductoModal"
+      >
+        Agregar Producto
+      </button></a
+    >
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Categoría</th>
+        <th>soporte</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let i = 0; i < productos.length; i++) { %>
+      <tr>
+        <td><%= productos[i].id %></td>
+        <td><%= productos[i].nombre %></td>
+        <td><%= productos[i].precio %></td>
+        <td><%= productos[i].codigo %></td>
+        <td><%= productos[i].categoria %></td>
+        <td class="buttons">
+          <button class="btn btn-success">
+            <a href="/admin/producto-imagen/<%= productos[i].id %>">agg img</a>
+          </button>
+
+          <button class="btn btn-warning">
+            <a href="/admin/producto-actualizar/<%= productos[i].id %>">edit</a>
+          </button>
+          <button
+            class="btn btn-danger"
+            id="<%= productos[i].id %>"
+            onclick="eliminarProducto()"
+          >
+            delete
+          </button>
+        </td>
+      </tr>
+
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  const eliminarProducto = (e) => {
+    const id = document.activeElement.id;
+    console.log(id);
+    const elementoDesaparecer =
+      document.activeElement.parentElement.parentElement;
+
+    const confirmacion = window.confirm(
+      "¿Estás seguro de que deseas continuar?"
+    );
+
+    if (!confirmacion) {
+      return;
+    }
+
+    fetch(`/admin/producto/eliminar/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        elementoDesaparecer.style.display = "none";
+      })
+      .catch((error) => {
+        console.error("Error al eliminar el producto:", error);
+        alert("Error al eliminar el producto");
+      });
+  };
+</script>
+
+<%- include("../../global/footer.ejs") -%>

@@ -1,0 +1,41 @@
+<%- include("../../global/header.ejs") -%> <%- include("../global/nav.ejs") -%>
+
+<div class="newProduct">
+  <div class="container">
+    <form action="/admin/producto/agregar" method="post">
+      <div class="containerInfo">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required />
+
+        <label for="descripcion">Descripción:</label>
+        <textarea name="descripcion" id="descripcion" rows="3"></textarea>
+
+        <label for="codigo">Código:</label>
+        <input type="text" name="codigo" id="codigo" required />
+
+        <label for="precio">Precio:</label>
+        <input type="number" name="precio" id="precio" required />
+
+        <label for="categoria">Categoría:</label>
+        <select name="categoria" id="categoria">
+          <% categorias.forEach(function(categoria) { %>
+          <option value="<%= categoria.dataValues.id %>">
+            <%= categoria.dataValues.nombre %>
+          </option>
+          <% }); %>
+        </select>
+
+        <label for="color">Color:</label>
+        <input type="text" name="color" id="color" />
+
+        <label for="soporte">Soporte:</label>
+        <input type="text" name="soporte" id="soporte" />
+
+        <input type="submit" value="Crear Producto" />
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<%- include("../../global/footer.ejs") -%>

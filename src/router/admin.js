@@ -10,7 +10,9 @@ import {
     productosPost,
     agregarProductoGet,
     agregarProductoPost,
-    eliminarProductoDelete
+    eliminarProductoDelete,
+    agregarImgProductoGet,
+    agregarImgProductoPost
 } from '../controllers/adminController.js';
 
 const router = express.Router();
@@ -30,5 +32,9 @@ router.get('/producto/agregar', agregarProductoGet);
 router.post('/producto/agregar', agregarProductoPost);
 
 router.delete('/producto/eliminar/:id', eliminarProductoDelete);
+
+router.get('/producto/imagen/:id', agregarImgProductoGet);
+
+router.post('/producto/imagen/:id', agregarImgProductoPost);
 
 export default router;

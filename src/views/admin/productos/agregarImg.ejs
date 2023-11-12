@@ -1,0 +1,138 @@
+<%- include("../../global/header.ejs") -%> <%- include("../global/nav.ejs") -%>
+
+<style>
+  .admin-cargar-img form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .admin-cargar-img label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    width: 180px;
+    height: 180px;
+  }
+  .admin-cargar-img input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .admin-cargar-img .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .admin-cargar-img .grid-item {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+  .admin-cargar-img .grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .admin-cargar-img button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .admin-cargar-img button:hover {
+    background-color: #45a049;
+  }
+  .admin-cargar-img .input {
+    width: 180px;
+    height: 180px;
+  }
+  .admin-cargar-img .input label {
+    border: 5px dashed rgba(211, 211, 211, 0.6);
+    width: 100%;
+    display: block;
+  }
+  .admin-cargar-img .input label img:empty {
+    display: none;
+  }
+  .admin-cargar-img .input input[type="file"] {
+    visibility: hidden;
+    display: none;
+  }
+  .admin-cargar-img img {
+    object-fit: cover;
+    width: 180px;
+    height: 180px;
+  }
+</style>
+
+<section class="admin-cargar-img">
+  <form
+    action="/admin/producto-imagen/<%= id %>"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div class="grid-container">
+      <div class="input" onchange="cargarImagen(event)">
+        <label for="img1">
+          <input type="file" name="img" id="img1" /> <img src="" alt=""
+        /></label>
+      </div>
+      <div class="input" onchange="cargarImagen(event)">
+        <label for="img2">
+          <input type="file" name="img" id="img2" /> <img src="" alt=""
+        /></label>
+      </div>
+      <div class="input" onchange="cargarImagen(event)">
+        <label for="img3">
+          <input type="file" name="img" id="img3" /> <img src="" alt=""
+        /></label>
+      </div>
+      <div class="input" onchange="cargarImagen(event)">
+        <label for="img4">
+          <input type="file" name="img" id="img4" /> <img src="" alt=""
+        /></label>
+      </div>
+    </div>
+
+    <button type="submit">Agregar Imagenes</button>
+  </form>
+</section>
+
+<script>
+  const cargarImagen = (event) => {
+    const nodo = document.getElementById(event.target.id).parentNode;
+
+    const input = event.target;
+    const imagePreview = nodo.querySelector("img");
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result;
+      };
+
+      nodo.style.border = "none";
+      imagePreview.style.display = "block";
+
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      imagePreview.src = ""; // Si no se selecciona ningún archivo, borra la imagen
+    }
+  };
+</script>
+
+<%- include("../../global/footer.ejs") -%>

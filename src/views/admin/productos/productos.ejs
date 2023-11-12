@@ -3,6 +3,12 @@
 <style>
   button a {
     color: aliceblue;
+    text-decoration: none;
+  }
+  button a:hover {
+    color: aliceblue;
+
+    text-decoration: none;
   }
 </style>
 <div class="container mt-5">
@@ -43,7 +49,7 @@
         <td><%= productos[i].categoria %></td>
         <td class="buttons">
           <button class="btn btn-success">
-            <a href="/admin/producto-imagen/<%= productos[i].id %>">agg img</a>
+            <a href="/admin/producto/imagen/<%= productos[i].id %>">agg img</a>
           </button>
 
           <button class="btn btn-warning">

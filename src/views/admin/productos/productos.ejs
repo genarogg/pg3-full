@@ -48,13 +48,12 @@
         <td><%= productos[i].codigo %></td>
         <td><%= productos[i].categoria %></td>
         <td class="buttons">
-          <button class="btn btn-success">
-            <a href="/admin/producto/imagen/<%= productos[i].id %>">agg img</a>
-          </button>
-
-          <button class="btn btn-warning">
-            <a href="/admin/producto/editar/<%= productos[i].id %>">editar</a>
-          </button>
+          <a href="/admin/producto/imagen/<%= productos[i].id %>">
+            <button class="btn btn-success">agg img</button>
+          </a>
+          <a href="/admin/producto/editar/<%= productos[i].id %>">
+            <button class="btn btn-warning">editar</button>
+          </a>
           <button
             class="btn btn-danger"
             id="<%= productos[i].id %>"

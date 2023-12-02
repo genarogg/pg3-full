@@ -1,0 +1,210 @@
+<%- include("../global/navPublico.ejs") -%>
+
+<style>
+  .lista {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .lista .row {
+    display: grid;
+  }
+
+  .lista .col-md-4 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .lista .col-md-8 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .lista .card-img {
+    width: 100%;
+    height: auto;
+    max-height: 360px;
+    min-height: 360px;
+    object-fit: cover;
+  }
+
+  .lista .card-body {
+    position: relative;
+  }
+
+  .lista a {
+    /* position: absolute;
+    bottom: 20px;
+    right: 50%; */
+    margin: 10px auto;
+  }
+
+  #toggleViewButton {
+    display: block;
+  }
+</style>
+
+<style>
+  /* Estilos generales */
+  .input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .input input {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  /* Estilos de Bootstrap */
+  .input input.form-control {
+    width: auto; /* Hace que los inputs ocupen el ancho automático disponible */
+  }
+</style>
+
+<div class="container mt-5">
+  <!-- Filtros -->
+  <div class="input">
+    <!-- Buscar por nombre -->
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Buscar por nombre"
+      onkeydown="filtrarElementos('searchInput', '.card-title');"
+    />
+
+    <!-- Buscar por descripcion -->
+    <input
+      type="text"
+      id="descripcion-input"
+      placeholder="Buscar por descripcion"
+      onkeydown="filtrarElementos('descripcion-input', '.card-description');"
+    />
+
+    <!-- Buscar por precio -->
+    <input
+      type="text"
+      id="precio-input"
+      placeholder="Buscar por precio"
+      onkeydown="filtrarElementos('precio-input', '.card-precio');"
+    />
+
+    <!-- Buscar por codigo -->
+    <input
+      type="text"
+      id="stock-input"
+      placeholder="Buscar por codigo"
+      onkeydown="filtrarElementos('stock-input', '.card-codigo');"
+    />
+
+    <!-- Buscar por categoria -->
+    <input
+      type="text"
+      id="categoria-input"
+      placeholder="Buscar por categoria"
+      onkeydown="filtrarElementos('categoria-input', '.card-categoria');"
+    />
+
+    <!-- Buscar por color -->
+    <input
+      type="text"
+      id="color-input"
+      placeholder="Buscar por color"
+      onkeydown="filtrarElementos('color-input', '.card-color');"
+    />
+
+    <!-- Buscar por soporte -->
+    <input
+      type="text"
+      id="soporte-input"
+      placeholder="Buscar por soporte"
+      onkeydown="filtrarElementos('soporte-input', '.card-soporte');"
+    />
+  </div>
+
+  <script>
+    function filtrarElementos(inputId, claseElementos) {
+      const searchInput = document.getElementById(inputId);
+      const elementos = Array.from(document.querySelectorAll(".card-body"));
+
+      searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        for (const elemento of elementos) {
+          const nombre = elemento
+            .querySelectorAll(claseElementos)[0]
+            .textContent.toLowerCase();
+
+          elemento.parentElement.parentElement.parentElement.style.display =
+            nombre.includes(searchTerm) ? "" : "none";
+        }
+      });
+    }
+  </script>
+
+  <button id="toggleViewButton" class="btn btn-primary mt-3">
+    Cambiar Vista
+  </button>
+
+  <h2>Productos</h2>
+
+  <div class="card-container lista">
+    <% data.forEach(function(producto) { %>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <!-- Puedes mostrar la primera imagen del producto aquí -->
+          <img
+            src="<%= producto.imagenes[0] %>"
+            class="card-img"
+            alt="<%= producto.nombre %>"
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= producto.nombre %></h5>
+            <!--  -->
+            <p class="card-description"><%= producto.descripcion %></p>
+            <!--  -->
+            <p class="card-precio">
+              <strong>Precio:</strong> $<%= producto.precio %><!--  -->
+            </p>
+            <p class="card-codigo">
+              <strong>Código:</strong> <%= producto.codigo %><!--  -->
+            </p>
+            <p class="card-color">
+              <strong>Color:</strong> <%= producto.color %>
+            </p>
+            <p>
+              <strong>Soporte:</strong>
+              <span class="card-soporte"><%= producto.soporte %></span>
+            </p>
+            <p class="card-categoria">
+              <strong>Categoría:</strong> <%= producto.categoria %>
+            </p>
+
+            <a href="/detalles/<%= producto.id %>">
+              <button class="btn btn-primary">Detalles</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Puedes agregar más detalles según sea necesario -->
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+<script>
+  const toggleViewButton = document.getElementById("toggleViewButton");
+  const productosContainer = document.querySelector(".card-container ");
+
+  toggleViewButton.addEventListener("click", () => {
+    productosContainer.classList.toggle("lista");
+  });
+</script>
+
+<%- include("../global/footer.ejs") -%>

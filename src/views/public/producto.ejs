@@ -1,0 +1,75 @@
+<%- include("../global/navPublico.ejs") -%>
+
+
+<style>
+  .img-thumbnail{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Carousel para mostrar imágenes del producto -->
+      <div id="carouselProducto" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <% data.imagenes.forEach(function(imagen, index) { %>
+          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+            <img
+              src="/<%= imagen %>"
+              class="d-block w-100"
+              alt="<%= data.nombre %>"
+            />
+          </div>
+          <% }); %>
+        </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselProducto"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselProducto"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+        </a>
+      </div>
+      <!-- Miniaturas de las imágenes -->
+      <div class="mt-3">
+        <div class="d-flex flex-row">
+          <% data.imagenes.forEach(function(imagen, index) { %>
+          <img
+            src="/<%= imagen %>"
+            class="img-thumbnail mr-2"
+            data-target="#carouselProducto"
+            data-slide-to="<%= index %>"
+          />
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Detalles del producto -->
+      <h2><%= data.nombre %></h2>
+      <p class="text-muted"><%= data.categoria %></p>
+      <p><%= data.descripcion %></p>
+      <p><strong>Precio:</strong> $<%= data.precio %></p>
+      <p><strong>Código:</strong> <%= data.codigo %></p>
+      <p><strong>Color:</strong> <%= data.color %></p>
+      <p><strong>Soporte:</strong> <%= data.soporte %></p>
+      <!-- Puedes agregar más detalles según sea necesario -->
+      <button class="btn btn-primary">Agregar al carrito</button>
+    </div>
+  </div>
+</div>
+<%- include("../global/footer.ejs") -%>

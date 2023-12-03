@@ -60,6 +60,18 @@
   .input input.form-control {
     width: auto; /* Hace que los inputs ocupen el ancho automático disponible */
   }
+
+  .lista {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .lista {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <div class="container mt-5">

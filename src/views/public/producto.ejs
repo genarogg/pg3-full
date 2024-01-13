@@ -175,22 +175,39 @@
 
       console.log(datosPago);
 
-      $.ajax({
-        url: "/payment",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(datosPago),
-        success: function (data) {
-          if (data.error === "token") {
+      // $.ajax({
+      //   url: "/payment",
+      //   type: "POST",
+      //   contentType: "application/json",
+      //   data: JSON.stringify(datosPago),
+      //   success: function (data) {
+      //     if (data.error === "token") {
+      //       window.location.href = "/login";
+      //     } else {
+      //       window.location.href = "/";
+      //     }
+      //   },
+      //   error: function (error) {
+      //     console.error("Error:", error);
+      //   },
+      // });
+
+      fetch("/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datosPago),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error === "jwtBad") {
             window.location.href = "/login";
           } else {
             window.location.href = "/";
           }
-        },
-        error: function (error) {
-          console.error("Error:", error);
-        },
-      });
+        })
+        .catch((error) => console.error("Error:", error));
     });
 </script>
 

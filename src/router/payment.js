@@ -14,7 +14,8 @@ router.post('/', async (req, res) => {
 
     const { cantidad, descripcion, tipoTarjeta, cvv, añoExpiracion, mesExpiracion, idProducto, tokenSesion } = req.body
 
-
+    
+console.log("tokenSesion", tokenSesion);
     jwt.verify(tokenSesion, JWT_SECRET, async (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: 'Token inválido', error: 'token' });
@@ -67,9 +68,13 @@ router.post('/', async (req, res) => {
                 }
             })
             .catch(err => {
-                /* console.error(err); */
+                console.error(err);
                 res.status(500).json({ message: 'Error al procesar el pago', error: err.message });
             });
+    }).catch(err => {
+        console.error(err);
+        return res.status(401).json({ message: 'Token inválido', error: 'jwtBad' });
+    
     });
 
     const getUserIdByEmail = (email) => {

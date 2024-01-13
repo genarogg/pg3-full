@@ -21,6 +21,8 @@ import {
     actualizarProductoPost
 } from "./admin/productos/editarProducto.js"
 
+import { comprasGet } from "./admin/compras/compras.js"
+
 export {
     categoriasGet,
     categoriasPost,
@@ -35,5 +37,6 @@ export {
     agregarImgProductoGet,
     agregarImgProductoPost,
     actualizarProductoGet,
-    actualizarProductoPost
+    actualizarProductoPost,
+    comprasGet
 }

@@ -1,0 +1,48 @@
+<%- include("../../global/header.ejs") -%> <%- include("../global/nav.ejs") -%>
+
+<style>
+  button a {
+    color: aliceblue;
+    text-decoration: none;
+  }
+  button a:hover {
+    color: aliceblue;
+    text-decoration: none;
+  }
+</style>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Tabla de Compras</h2>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Cliente ID</th>
+        <th>IP Cliente</th>
+        <th>ID Transacción</th>
+        <th>Producto ID</th>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+        <th>Total Pagado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let i = 0; i < data.length; i++) { %>
+      <tr>
+        <td><%= data[i].dataValues.id %></td>
+        <td><%= data[i].dataValues.cliente_id %></td>
+        <td><%= data[i].dataValues.ip_cliente %></td>
+        <td><%= data[i].dataValues.id_transaccion %></td>
+        <td><%= data[i].dataValues.producto_id %></td>
+        <td><%= data[i].dataValues.descripcion %></td>
+        <td><%= data[i].dataValues.cantidad %></td>
+        <td><%= data[i].dataValues.total_pagado %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include("../../global/footer.ejs") -%>

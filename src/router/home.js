@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-router.get('/', inicioGet);
+router.get('/', productosGet/* inicioGet */);
 
 router.get('/login', loginGet);
 router.post('/login', loginPost);

@@ -14,7 +14,8 @@ import {
     agregarImgProductoGet,
     agregarImgProductoPost,
     actualizarProductoGet,
-    actualizarProductoPost
+    actualizarProductoPost,
+    comprasGet
 } from '../controllers/adminController.js';
 
 const router = express.Router();
@@ -42,6 +43,8 @@ router.post('/producto/imagen/:id',upload.array('img', 4), agregarImgProductoPos
 router.get('/producto/editar/:id', actualizarProductoGet);
 
 router.post('/producto/editar/:id', actualizarProductoPost);
+
+router.get('/compras', comprasGet);
 
 
 export default router;

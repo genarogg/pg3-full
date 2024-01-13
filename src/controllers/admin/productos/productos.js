@@ -2,6 +2,7 @@ import Producto from "../../../models/producto/Producto.js";
 import Categoria from "../../../models/producto/Categoria.js";
 
 const productosGet = async (req, res) => {
+    
     const productos = await Producto.findAll();
 
 

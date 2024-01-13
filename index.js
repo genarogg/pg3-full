@@ -27,11 +27,12 @@ sequelize.sync({ logging: false }).then(() => {
 import home from './src/router/home.js';
 import admin from './src/router/admin.js';
 import suario from './src/router/usuario.js';
+import payment from './src/router/payment.js';
 
 app.use('/', home);
 app.use('/admin', admin);
 app.use('/usuario', suario);
-
+app.use('/payment', payment);
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);

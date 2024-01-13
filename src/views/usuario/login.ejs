@@ -1,0 +1,62 @@
+<%- include("../global/navPublico.ejs") -%>
+
+<div class="container">
+  <div style="max-width: 400px; margin: auto">
+    <h2>Login Form</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const data = { email, password };
+
+      fetch("/usuario/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.token) {
+            localStorage.setItem("tokenSesion", data.token);
+            window.location.href = "/";
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    });
+</script>
+
+<%- include("../global/footer.ejs") -%>

@@ -3,17 +3,19 @@ import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
 import axios from 'axios';
 import Payment from '../models/payment/Payment.js';
+import Usuario from '../models/usuario/Usuario.js';
+import ip from 'ip';
 
 const router = express.Router();
 
 const { JWT_SECRET, API_PAYMENT, API_KEY } = process.env;
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
-    const { cantidad, descripcion, tipoTarjeta, cvv, añoExpiracion,mesExpiracion, idProducto, tokenSesion } = req.body
+    const { cantidad, descripcion, tipoTarjeta, cvv, añoExpiracion, mesExpiracion, idProducto, tokenSesion } = req.body
 
 
-    jwt.verify(tokenSesion, JWT_SECRET, (err, decoded) => {
+    jwt.verify(tokenSesion, JWT_SECRET, async (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: 'Token inválido', error: 'token' });
         }
@@ -31,8 +33,7 @@ router.post('/', (req, res) => {
             "reference": `product_id:${idProducto}`,
         };
 
-        console.log("Datos de pago:", datosPago);
-      
+
 
         axios.post(`${API_PAYMENT}/payments`, datosPago, {
             headers: {
@@ -40,17 +41,54 @@ router.post('/', (req, res) => {
                 Authorization: `Bearer ${API_KEY}`,
             }
         })
-            .then(response => {
-                console.log("Response:", response.data);
-
-                // Asegúrate de que no estás enviando otra respuesta después de esta línea
+            .then(async (response) => {
+                try {
+                    await getUserIdByEmail(decoded.email).then(id => {
+                        const datosPago = {
+                            cliente_id: id,
+                            ip_cliente: ip.address(),
+                            id_transaccion: response.data.data.transaction_id,
+                            producto_id: idProducto,
+                            descripcion: descripcion,
+                            cantidad: 1,
+                            total_pagado: cantidad,
+                        }
+                        Payment.create(datosPago)
+                            .then(pago => {
+                                res.status(200).json({ message: 'Pago procesado con éxito', pago: pago });
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                res.status(500).json({ message: 'Error al procesar el pago', error: err.message });
+                            });
+                    });
+                } catch (error) {
+                    console.error("Error:", error);
+                }
             })
             .catch(err => {
                 /* console.error(err); */
                 res.status(500).json({ message: 'Error al procesar el pago', error: err.message });
             });
     });
+
+    const getUserIdByEmail = (email) => {
+        return Usuario.findOne({ email: email })
+            .then(user => {
+                if (user) {
+                    return user.id;
+                } else {
+                    throw new Error('No se encontró un usuario con ese correo electrónico');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                throw err;
+            });
+    }
 });
+
+
 
 
 

@@ -1,0 +1,47 @@
+<%- include("../global/navPublico.ejs") -%>
+
+<div class="container">
+  <div style="max-width: 400px; margin: auto;">
+    <h2>Reset Password Form</h2>
+    <form id="resetPassForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Reset Password</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("resetPassForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+
+      const response = await fetch("/usuario/reset-pass", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        window.location.href = "/"; // Redirige al usuario a la página de inicio
+      } else {
+        // Maneja el error
+        console.error("Error: ", await response.text());
+      }
+    });
+</script>
+
+<%- include("../global/footer.ejs") -%>

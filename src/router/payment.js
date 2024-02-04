@@ -5,6 +5,7 @@ import axios from 'axios';
 import Payment from '../models/payment/Payment.js';
 import Usuario from '../models/usuario/Usuario.js';
 import ip from 'ip';
+import sendEmail from '../email/sendEmail.js';
 
 const router = express.Router();
 
@@ -56,6 +57,9 @@ console.log("tokenSesion", tokenSesion);
                         }
                         Payment.create(datosPago)
                             .then(pago => {
+
+                                sendEmail(decoded.email, 'Pago procesado con éxito', `El pago por ${cantidad} ha sido procesado con éxito. Gracias por su compra.`)
+
                                 res.status(200).json({ message: 'Pago procesado con éxito', pago: pago });
                             })
                             .catch(err => {

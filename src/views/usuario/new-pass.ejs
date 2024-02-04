@@ -1,0 +1,68 @@
+<%- include("../global/navPublico.ejs") -%>
+
+<div class="container">
+  <div style="max-width: 400px; margin: auto;">
+    <h2>New Password Form</h2>
+    <form id="newPassForm">
+      <div class="form-group">
+        <label for="password">New Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm New Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("newPassForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      const urlPath = window.location.pathname;
+      const urlParts = urlPath.split("/");
+      const token = urlParts[urlParts.length - 1];
+
+      const response = await fetch(`/usuario/new-pass/${token}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (response.ok) {
+        alert("Password updated successfully");
+        window.location.href = "/"; // Redirige al usuario a la página de inicio
+      } else {
+        // Maneja el error
+        console.error("Error: ", await response.text());
+      }
+    });
+</script>
+
+<%- include("../global/footer.ejs") -%>
